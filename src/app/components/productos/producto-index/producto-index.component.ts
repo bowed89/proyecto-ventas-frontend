@@ -35,10 +35,7 @@ export class ProductoIndexComponent implements OnInit {
     this._productoService.get_productos('').subscribe(
       response => {
         this.productos = response.productos;
-        console.log(this.productos);
-      },
-      error => {
-
+        console.log(response);
       }
     );
 
@@ -46,8 +43,6 @@ export class ProductoIndexComponent implements OnInit {
     this._productoService.get_categorias().subscribe(
       response => {
         this.categorias = response.categorias;
-      }, error => {
-
       });
   }
   search(searchForm) {
@@ -73,19 +68,11 @@ export class ProductoIndexComponent implements OnInit {
           this._productoService.get_categorias().subscribe(
             response => {
               this.categorias = response.categorias;
-            },
-            error => {
-
             }
           );
-        },
-        error => {
-
-        }
-        );
+        });
+      }
     }
-
-  }
 
   eliminar(id) {
     Swal.fire({
@@ -102,29 +89,15 @@ export class ProductoIndexComponent implements OnInit {
           'Registro eliminado!',
           'Se eliminó correctamente',
           'success'
-        )
-
+        );
         this._productoService.delete_producto(id).subscribe(
           response => {
-
             this._productoService.get_productos('').subscribe(
-              
               response=>{
-
                 this.productos = response.productos;
-
-              }
-            );
-
-          },
-          error => {
-
-          }
-        );
-
-
-
-      } else if (
+              });
+          });
+        } else if (
         /* Read more about handling dismissals below */
         result.dismiss === Swal.DismissReason.cancel
       ) {
@@ -132,10 +105,10 @@ export class ProductoIndexComponent implements OnInit {
           'Cancelado',
           'Se canceló la solicitud',
           'error'
-        )
-      }
-    })
-  }
+        );
+      }});
+    }
+
   get_id(id) {
     this.producto_id = id;
   }
@@ -159,16 +132,10 @@ export class ProductoIndexComponent implements OnInit {
               response => {
                 this.productos = response.productos;
                 $('.modal').modal('hide');
-              }
-            );
-
-          }, error => {
-
+              });
+            });
           }
-        );
-
+        }
       }
-    }
-  }
 
-}
+  }

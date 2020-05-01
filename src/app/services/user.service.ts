@@ -55,4 +55,26 @@ export class UserService {
 
     return this.identity;
   }
+
+  get_users(): Observable<any> {
+    const headers = new HttpHeaders().set('Content-Type', 'application/json');
+    return this.http.get(this.url + 'usuarios', {headers});
+  }
+
+  registrar(data): Observable<any> {
+    const headers = new HttpHeaders().set('Content-Type', 'application/json');
+    return this.http.post(this.url + 'registrar', data, {headers});
+  }
+
+  get_user(id): Observable<any> {
+    const headers = new HttpHeaders().set('Content-Type', 'application/json');
+    return this.http.get(this.url + 'user/' + id, {headers});
+  }
+
+  editar(data): Observable<any> {
+    const headers = new HttpHeaders().set('Content-Type', 'application/json');
+    return this.http.put(this.url + 'user/editar/' + data._id, data, {headers});
+  }
+
+
 }

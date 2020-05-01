@@ -1,0 +1,122 @@
+<div class="wrapper">
+    <app-sidebar style="background: white !important;"></app-sidebar>
+
+    <div class="main">
+        <nav class="navbar navbar-expand navbar-theme">
+            <a class="sidebar-toggle d-flex mr-2">
+                <i class="hamburger align-self-center"></i>
+            </a>
+
+            <div class="navbar-collapse collapse">
+                <ul class="navbar-nav ml-auto">
+
+                    <li class="nav-item dropdown ml-lg-2">
+                        <a class="nav-link dropdown-toggle position-relative" href="#" id="userDropdown" data-toggle="dropdown">
+                            <i class="align-middle fas fa-cog"></i>
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
+                            <a class="dropdown-item" href="#"><i class="align-middle mr-1 fas fa-fw fa-user"></i> View Profile</a>
+                            <a class="dropdown-item" href="#"><i class="align-middle mr-1 fas fa-fw fa-comments"></i> Contacts</a>
+                            <a class="dropdown-item" href="#"><i class="align-middle mr-1 fas fa-fw fa-chart-pie"></i> Analytics</a>
+                            <a class="dropdown-item" href="#"><i class="align-middle mr-1 fas fa-fw fa-cogs"></i> Settings</a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" href="#"><i class="align-middle mr-1 fas fa-fw fa-arrow-alt-circle-right"></i> Sign out</a>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+
+        </nav>
+        <main class="content">
+            <div class="container-fluid">
+
+                <div class="header">
+                    <h1 class="header-title">
+                        Clientes
+                    </h1>
+                </div>
+
+                <div class="row">
+
+                    <div class="col-12 col-xl-12">
+
+                        <nav aria-label="breadcrumb">
+                            <ol class="breadcrumb">
+                                <li class="breadcrumb-item"><a [routerLink]="['/dashboard']">Dashboard</a></li>
+                                <li class="breadcrumb-item"><a [routerLink]="['/clientes']">Clientes</a></li>
+                                <li class="breadcrumb-item"><a>Editar cliente</a></li>
+
+                            </ol>
+                        </nav>
+
+                        <!-- MENSAJES DE ALERT ERROR Y SUCCESS -->
+                        <div class="col-12 col-lg-12" *ngIf="error_message">
+                            <div class="alert alert-danger alert-dismissible" role="alert">
+                                <div class="alert-message">
+                                    {{error_message}}
+                                </div>
+                                <button (click)="error_alert()" type="button" class="close" data-dismiss="alert" aria-label="close">
+                                    <span aria-hidden="true">x</span>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="col-12 col-lg-12" *ngIf="success_message">
+                            <div class="alert alert-info alert-dismissible" role="alert">
+                                <div class="alert-message">
+                                    {{success_message}}
+                                </div>
+                                <button (click)="success_alert()" type="button" class="close" data-dismiss="alert" aria-label="close">
+                                    <span aria-hidden="true">x</span>
+                                </button>
+                            </div>
+                        </div>
+                        <!-- END MENSAJES DE ALERT ERRO Y SUCCESS -->
+
+                        <form ngNative #clienteForm="ngForm" (ngSubmit)="onSubmit(clienteForm)">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h5 class="card-title">Datos del cliente</h5>
+                                </div>
+
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div class="col-lg-4">
+                                            <div class="form-group">
+                                                <label><b>Nombres del cliente</b></label>
+                                                <input type="text" class="form-group" #nombre="ngModel" name="nombres" [(ngModel)]="cliente.nombres" placeholder="Nombres completos" required>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-lg-4">
+                                            <div class="form-group">
+                                                <label><b>Correo del cliente</b></label>
+                                                <input type="text" class="form-group" #correos="ngModel" name="correo" [(ngModel)]="cliente.correo" placeholder="Correo electrónico" required>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-lg-4">
+                                            <div class="form-group">
+                                                <label><b>DNI del cliente</b></label>
+                                                <input type="number" class="form-group" #dnis="ngModel" name="dni" [(ngModel)]="cliente.dni" placeholder="Número de CI." required>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <div class="card-footer">
+                                    <button class="btn btn-success" type="submit">Actualizar cliente</button>
+                                </div>
+
+                            </div>
+                        </form>
+
+
+                    </div>
+
+                </div>
+            </div>
+        </main>
+
+    </div>
+
+</div>

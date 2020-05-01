@@ -11,7 +11,7 @@ import { Router } from '@angular/router';
 export class LoginComponent implements OnInit {
 
   public token;
-  public identity;
+  public identity = this._userService.getIdentity();
   public user = new User('', '', '', '', '');
   public data_error;
 
@@ -21,6 +21,9 @@ export class LoginComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    if (this.identity) {
+      this.router.navigate(['ventas']);
+    }
   }
   close_message() {
     this.data_error = '';
@@ -39,7 +42,7 @@ export class LoginComponent implements OnInit {
           this._userService.login(this.user, true).subscribe(
             response => {
               localStorage.setItem('identity', JSON.stringify(response.user));
-              this.router.navigate(['dashboard']);
+              this.router.navigate(['ventas']);
 
             },
             error => {}
@@ -50,14 +53,7 @@ export class LoginComponent implements OnInit {
           this.data_error = error.error.message;
         }
       );
-
-
-
     }
-
-
   }
-
-  
 
 }
